@@ -7,6 +7,12 @@ from dataclasses import dataclass
 from typing import List
 from datetime import datetime
 import httpx
+from tenacity import (
+    retry,
+    stop_after_attempt,
+    wait_exponential,
+    retry_if_exception_type
+)
 @dataclass
 class ArxivPaper:
     """An arXiv paper."""
@@ -28,21 +34,22 @@ def fetch_papers_by_category(category: str, limit: int = 10) -> List[ArxivPaper]
     """Fetch papers from a specific arXiv category."""
     print(f"  → Fetching latest {limit} papers from category '{category}'...")
     query = f"cat:{category}"
-    return _query_arxiv(query, "submittedDate", limit)
+    try:
+        return _query_arxiv(query, "lastUpdatedDate", limit)
+    except Exception as e:
+        print(f"    DEBUG: Error fetching papers: {e}")
+        return []
 
+@retry(stop=stop_after_attempt(3), wait=wait_exponential(multiplier=1, min=4, max=10), retry=retry_if_exception_type(httpx.TimeoutException), reraise=True)
 def _query_arxiv(query: str, sort_by: str, limit: int) -> List[ArxivPaper]:
     """Execute a single ArXiv API query and parse results."""
     url = f"https://export.arxiv.org/api/query?search_query={query}&start=0&max_results={limit}&sortBy={sort_by}&sortOrder=descending"
     
-    try:
-        resp = httpx.get(url, timeout=30)
-        xml = resp.text
-        
-        if len(xml) < 500:
-            print(f"    DEBUG: Short response ({len(xml)} bytes)")
-            return []
-    except Exception as e:
-        print(f"    ERROR: {e}")
+    resp = httpx.get(url, timeout=30)
+    xml = resp.text
+    
+    if len(xml) < 500:
+        print(f"    DEBUG: Short response ({len(xml)} bytes)")
         return []
     
     papers = []

@@ -5,7 +5,7 @@ import os
 import logging
 from dotenv import load_dotenv
 from typing import List
-from prompt_loader import load_prompt
+from .prompt_loader import load_prompt
 logger = logging.getLogger(__name__)
 
 load_dotenv()
