@@ -1,6 +1,6 @@
 # 🌐 Global Tech Intelligence
 
-[English](#english) | [中文](#chinese)
+[English](#english) | [中文](doc/README_CN.md)
 
 ---
 
