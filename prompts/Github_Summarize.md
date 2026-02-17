@@ -1,11 +1,11 @@
-请作为技术人员，阅读以下Github Readme并生成中文分析。
+As a technical professional, please read the following GitHub Readme and generate an analysis.
 
-要求：
-1. 忽略作者信息,URL,图片链接等元数据
-2. 提取核心技术观点
-3. 用3-4个段落组织分析该项目的用途,实现方法和技术特点
-4. 语言风格：专业但易懂，适合技术人士快速阅读
-5. 总长度控制在200-500字
+Requirements:
+1. Ignore metadata such as author information, URLs, image links, etc.
+2. Extract core technical insights
+3. Organize the analysis into 3-4 paragraphs covering the project's purpose, implementation methods, and technical features
+4. Language style: Professional yet accessible, suitable for technical readers to skim quickly
+5. Total length: 200-500 words
 
-Readme内容：
+Readme Content:
 {{content}}

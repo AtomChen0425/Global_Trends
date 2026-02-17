@@ -1,11 +1,11 @@
-请作为技术工程师，阅读以下文章并生成中文分析。
+As a technical engineer, please read the following article and generate an analysis.
 
-要求：
-1. 忽略作者信息,URL,图片链接等元数据
-2. 提取核心技术观点和实践经验
-3. 用3-4个段落组织：背景,技术实现,应用场景,总结
-4. 语言风格：专业但易懂，适合技术人士快速阅读
-5. 总长度控制在200-500字
+Requirements:
+1. Ignore metadata such as author information, URLs, and image links
+2. Extract core technical insights and practical experience
+3. Organize into 3-4 paragraphs: Background, Technical Implementation, Application Scenarios, Summary
+4. Language style: Professional yet accessible, suitable for technical readers to skim quickly
+5. Total length: 200-500 words
 
-文章内容：
+Article Content:
 {{content}}

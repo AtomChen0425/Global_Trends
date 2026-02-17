@@ -7,10 +7,10 @@ import os
 import logging
 import concurrent.futures
 from typing import Dict, List
-from FetchPipeline.HN_pipeline import fetch_top_stories
-from FetchPipeline.github_pipeline import fetch_github_from_web, enrich_trend_data, fetch_latest_Github
-from FetchPipeline.arxiv_pipeline import fetch_papers_by_category
-from Generators.report_generator_md import generate_report,save_report
+from src.FetchPipeline.HN_pipeline import fetch_top_stories
+from src.FetchPipeline.github_pipeline import fetch_github_from_web, enrich_trend_data, fetch_latest_Github
+from src.FetchPipeline.arxiv_pipeline import fetch_papers_by_category
+from src.Generators.report_generator_md import generate_report_CN,save_report,generate_report_EN
 logging.basicConfig(
     level=logging.INFO,
     format='%(asctime)s - %(levelname)s - [%(name)s] %(message)s',
@@ -153,8 +153,8 @@ if __name__ == "__main__":
     # print(intel)
     print("\n" + "="*40)
     print("开始生成并排版Markdown 报告...")
-    markdown_content = generate_report(intel)
+    markdown_content = generate_report_EN(intel)
     
     # 保存文件
-    file_path = save_report(markdown_content)
+    file_path = save_report(markdown_content, output_dir="reports", lang="EN")
     # print(format_intel(intel))
