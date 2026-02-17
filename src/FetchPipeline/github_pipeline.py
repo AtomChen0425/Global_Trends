@@ -140,7 +140,7 @@ def fetch_github_from_web() -> list[GitHubTrend]:
             logger.debug(f"Failed to parse GitHub row: {e}")
             continue
     return trends
-def fetch_trending(language: Optional[str] = None) -> list[GitHubTrend]:
+def fetch_latest_Github(language: Optional[str] = None) -> list[GitHubTrend]:
     """
     Search for repos created in the last 7 days, sorted by stars.
     """

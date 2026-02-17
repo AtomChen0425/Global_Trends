@@ -6,7 +6,7 @@ import json
 from dataclasses import dataclass
 from typing import List, Optional
 import httpx
-
+from datetime import datetime
 @dataclass
 class HNStory:
     """A Hacker News story."""
@@ -16,6 +16,7 @@ class HNStory:
     score: int
     by: str
     descendants: int  # comment count
+    timestr: Optional[str] = None
     
     @property
     def hn_url(self) -> str:
@@ -32,6 +33,7 @@ def fetch_top_stories(limit: int = 10) -> List[HNStory]:
     stories = []
     for sid in story_ids:
         item_resp = httpx.get(f"https://hacker-news.firebaseio.com/v0/item/{sid}.json", timeout=10)
+        
         item = item_resp.json()
         if item and item.get("type") == "story":
             stories.append(HNStory(
@@ -40,7 +42,8 @@ def fetch_top_stories(limit: int = 10) -> List[HNStory]:
                 url=item.get("url"),
                 score=item.get("score", 0),
                 by=item.get("by", "unknown"),
-                descendants=item.get("descendants", 0)
+                descendants=item.get("descendants", 0),
+                timestr=datetime.fromtimestamp(item.get("time", 0)).strftime("%Y-%m-%d %H:%M") if item.get("time") else None
             ))
     
     return stories

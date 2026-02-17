@@ -11,11 +11,11 @@ logger = logging.getLogger(__name__)
 load_dotenv()
 GEMINI_API_URL = "https://generativelanguage.googleapis.com/v1beta/models"
 GEMINI_MODEL = "gemini-2.5-flash-lite"
-def gemini_summarize(text: str) -> str:
+def gemini_summarize(text: str,prompt_name:str) -> str:
     """Summarize text using Gemini API."""
     GEMINI_API_KEY=os.getenv("GEMINI_API_KEY")
     url = f"{GEMINI_API_URL}/{GEMINI_MODEL}:generateContent?key={GEMINI_API_KEY}"
-    prompt = load_prompt("summarize", content=text)
+    prompt = load_prompt(prompt_name, content=text)
     payload = {
         "contents": [{"parts": [{"text": prompt}]}],
         "generationConfig": {
