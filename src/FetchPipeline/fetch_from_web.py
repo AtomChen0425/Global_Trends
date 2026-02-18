@@ -1,5 +1,3 @@
-
-
 import httpx
 from bs4 import BeautifulSoup
 from urllib.parse import quote
@@ -10,7 +8,6 @@ HEADERS = {
     "User-Agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36"
 }
 def _validate_url(url: str) -> bool:
-    """Validate that a URL is well-formed."""
     return bool(url and url.startswith(('http://', 'https://')))
 def fetch_url_content(url: str) -> str:
     """

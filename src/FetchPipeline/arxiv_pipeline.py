@@ -1,11 +1,7 @@
-"""
-Fetches latest papers from arXiv.
-"""
 import sys
 import re
 from dataclasses import dataclass
 from typing import List
-from datetime import datetime
 import httpx
 from tenacity import (
     retry,
@@ -82,7 +78,7 @@ def _query_arxiv(query: str, sort_by: str, limit: int) -> List[ArxivPaper]:
 def print_papers(papers: List[ArxivPaper]):
     """Print papers in a readable format."""
     print(f"\n{'='*60}")
-    print(f"  📚 arXiv AI/ML Latest Papers")
+    print(f"  📚 arXiv Latest Papers")
     print(f"{'='*60}\n")
     
     for i, p in enumerate(papers, 1):
@@ -94,7 +90,6 @@ def print_papers(papers: List[ArxivPaper]):
 
 if __name__ == "__main__":
     limit = int(sys.argv[1]) if len(sys.argv) > 1 else 10
-    # papers = fetch_ai_papers(limit)
     CV_papers=fetch_papers_by_category("cs.CV", limit)
     if CV_papers:
         print_papers(CV_papers)

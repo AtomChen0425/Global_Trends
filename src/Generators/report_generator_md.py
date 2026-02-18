@@ -4,11 +4,10 @@ import logging
 from datetime import datetime
 from src.FetchPipeline.fetch_from_web import fetch_url_content
 
-# 尝试导入 Gemini AI 工具
 try:
     from src.utils.AI_Agent import gemini_summarize
     GEMINI_AVAILABLE = True
-    GEMINI_RATE_LIMIT_DELAY = 2.0  # 避免触发 API 频率限制
+    GEMINI_RATE_LIMIT_DELAY = 2.0  # 每次调用后等待 2 秒，避免速率限制
 except ImportError:
     GEMINI_AVAILABLE = False
     logging.getLogger(__name__).warning("Gemini AI_Agent 模块未找到，将仅使用原文摘要。")
@@ -43,11 +42,9 @@ def _format_expandable_block(text: str, label: str = "🤖 AI 摘要", cutoff: i
         # 文本很短，直接显示
         return f"> <strong>{label}:</strong> {text}\n"
 
-    # 切割文本
     head = text[:cutoff]
     # tail = text[cutoff:]
-    
-    # 转义 summary 标签中的特殊字符，防止 HTML 渲染错误
+
     head_safe = head.replace('"', "'").replace("<", "&lt;").replace(">", "&gt;")
 
     html = [

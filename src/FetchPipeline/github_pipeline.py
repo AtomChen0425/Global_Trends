@@ -1,7 +1,3 @@
-"""
-Fetches GitHub repositories.
-"""
-
 import os
 import sys
 import datetime
@@ -259,7 +255,6 @@ def print_trends(trends: list[GitHubTrend]) -> None:
 
 if __name__ == "__main__":
     lang = sys.argv[1] if len(sys.argv) > 1 else None
-    # trends = fetch_trending(lang)
     trends = fetch_github_from_web()
     trends = enrich_trend_data(trends)
     print(f"Number of trends fetched: {len(trends)}")

@@ -1,8 +1,4 @@
-"""
-Fetches top stories from Hacker News.
-"""
 import sys
-import json
 from dataclasses import dataclass
 from typing import List, Optional
 import httpx
