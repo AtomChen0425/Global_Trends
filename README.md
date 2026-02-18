@@ -64,6 +64,6 @@ Global_Trends/
 ```
 
 ### GitHub Action Automation
-A daily report has been generated in the issue.
+A daily report has been generated in the [issue](https://github.com/AtomChen0425/Global_Trends/issues).
 
 Historical data can be found in the reports folder.
