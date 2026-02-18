@@ -25,7 +25,7 @@
 
 1. **克隆项目**
 ```bash
-git clone [https://github.com/your-username/Global_Trends.git](https://github.com/your-username/Global_Trends.git)
+git clone https://github.com/AtomChen0425/Global_Trends.git
 cd Global_Trends
 
 ```
