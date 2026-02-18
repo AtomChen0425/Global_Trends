@@ -39,13 +39,30 @@ jobs:
           commit_message: "chore: daily report."
           file_pattern: 'reports/*.md'
 
+      - name: Close Previous Open Reports
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }} 
+        run: |
+          echo "🔍 Checking for old open reports..."
+          ids=$(gh issue list --label "daily-report" --state open --json number --jq '.[].number')
+          
+          if [ -z "$ids" ]; then
+            echo "✅ No open reports found."
+          else
+            for id in $ids; do
+              echo "🔒 Closing issue #$id..."
+              gh issue close "$id" --comment "📅 New report generated."
+              
+            done
+          fi
+
       - name: Create Issue
         uses: peter-evans/create-issue-from-file@v5
         with:
           title: 🌐 Global Tech Briefing - ${{ env.DATE }}
           content-filepath: ./reports/Daily_Briefing_${{ env.DATE }}_EN.md
           labels: 
-            daily-report
-            automated
+            - daily-report
+            - automated
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
