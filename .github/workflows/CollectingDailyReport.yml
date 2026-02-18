@@ -61,8 +61,8 @@ jobs:
         with:
           title: 🌐 Global Tech Briefing - ${{ env.DATE }}
           content-filepath: ./reports/Daily_Briefing_${{ env.DATE }}_EN.md
-          labels: 
-            - daily-report
-            - automated
+          labels: |
+            daily-report
+            automated
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
