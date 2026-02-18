@@ -3,6 +3,7 @@
 [English](#english) | [中文](doc/README_CN.md)
 
 ---
+<a name="english"></a>
 
 ### 📖 Introduction
 **Global Tech Intelligence** is an automated information aggregation pipeline designed to track the latest global technology trends. It fetches data from high-quality tech sources, utilizes **Google Gemini AI** for deep content summarization, and generates structured Daily Briefing reports.
@@ -61,3 +62,7 @@ Global_Trends/
 ├── prompts/                      # Prompt templates for Gemini
 └── reports/                      # Output directory for briefings
 ```
+
+### GitHub Action Automation
+A daily report has been generated in the issue.
+Historical data can be found in the reports folder.
