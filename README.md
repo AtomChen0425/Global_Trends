@@ -65,4 +65,5 @@ Global_Trends/
 
 ### GitHub Action Automation
 A daily report has been generated in the issue.
+
 Historical data can be found in the reports folder.
