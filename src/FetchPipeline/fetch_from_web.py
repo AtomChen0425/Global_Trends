@@ -26,6 +26,6 @@ def fetch_url_content(url: str) -> str:
         chunks = (phrase.strip() for line in lines for phrase in line.split("  "))
         text = ' '.join(chunk for chunk in chunks if chunk)
         return text[:CONTENT_TRUNCATE_LIMIT]
-    except (httpx.RequestError, ValueError, AttributeError) as e:
+    except Exception as e:
         logger.debug(f"Failed to fetch content from {url}: {e}")
         return ""
