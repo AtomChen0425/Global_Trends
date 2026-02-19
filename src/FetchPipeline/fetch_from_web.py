@@ -5,8 +5,15 @@ import logging
 logger = logging.getLogger(__name__)
 CONTENT_TRUNCATE_LIMIT = 5000
 HEADERS = {
-    "User-Agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36"
-}
+        "User-Agent": (
+            "Mozilla/5.0 (Windows NT 10.0; Win64; x64) "
+            "AppleWebKit/537.36 (KHTML, like Gecko) "
+            "Chrome/121.0.0.0 Safari/537.36"
+        ),
+        "Accept-Language": "en-US,en;q=0.9",
+        "Accept": "text/html,application/xhtml+xml",
+        "Referer": "https://www.google.com/",
+    }
 def _validate_url(url: str) -> bool:
     return bool(url and url.startswith(('http://', 'https://')))
 def fetch_url_content(url: str) -> str:
@@ -26,6 +33,9 @@ def fetch_url_content(url: str) -> str:
         chunks = (phrase.strip() for line in lines for phrase in line.split("  "))
         text = ' '.join(chunk for chunk in chunks if chunk)
         return text[:CONTENT_TRUNCATE_LIMIT]
+    except httpx.HTTPStatusError as e:
+        logger.warning(f"Fetch failed ({e.response.status_code}) for {url}")
+        return ""
     except Exception as e:
-        logger.debug(f"Failed to fetch content from {url}: {e}")
+        logger.warning(f"Failed to fetch content from {url}: {e}")
         return ""
