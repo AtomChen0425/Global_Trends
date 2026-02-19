@@ -1,7 +1,7 @@
 name: Run Daily Collection
 on:
   schedule:
-    - cron: '47 1 * * *'
+    - cron: '*/5 * * * *'
   workflow_dispatch:
 
 permissions:
